@@ -1,6 +1,6 @@
-def main():
-    print("Hello from langgraph!")
+from fastapi import FastAPI
+app = FastAPI()
 
-
-if __name__ == "__main__":
-    main()
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}

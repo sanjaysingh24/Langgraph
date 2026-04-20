@@ -1,2 +1,7 @@
 fastapi[standard]
 uvicorn
+langgraph
+langchain
+langchain-huggingface
+langchain-community
+dotenv
