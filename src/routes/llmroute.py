@@ -1,8 +1,9 @@
 from src.config.llm import agent
 from fastapi import APIRouter
-from src.schema.chatSchema import ChatResponse
-router = APIRouter(prefix="/llm", tags=["llm"])
+from src.schema.chatSchema import ChatRequest
+llmrouter = APIRouter(prefix="/llm", tags=["llm"])
 
-@router.post("/agent")
-async def call_agent(data:ChatResponse):
+@llmrouter.post("/agent")
+async def call_agent(data:ChatRequest):
     response = await agent(data.message)
+    return {"response": response}

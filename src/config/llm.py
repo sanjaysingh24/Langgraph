@@ -12,6 +12,6 @@ llm = HuggingFaceEndpoint(
 model = ChatHuggingFace(llm=llm)
 
 async def agent(message:str):
-    response =  model.invoke(message)
-    print(response)
+    response =  await model.invoke(message)
+    return response
 
