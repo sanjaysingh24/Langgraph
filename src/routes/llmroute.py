@@ -5,5 +5,5 @@ llmrouter = APIRouter(prefix="/llm", tags=["llm"])
 
 @llmrouter.post("/agent")
 async def call_agent(data:ChatRequest):
-    response = await agent(data.message)
-    return {"response": response}
+    response = agent(data.message)
+    return response

@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain_huggingface import ChatHuggingFace,HuggingFaceEndpoint
+from langchain_core.output_parsers import StrOutputParser
 load_dotenv()
 
 
@@ -9,10 +10,12 @@ llm = HuggingFaceEndpoint(
     task="text-generation",
     max_new_tokens=1000,
 )
+parser = StrOutputParser()
 
 model = ChatHuggingFace(llm=llm)
 
-async def agent(message:str):
-    response =  await model.invoke(message)
+final_output = model | parser
+def agent(message:str):
+    response =  final_output.invoke(message)
     return response
 
