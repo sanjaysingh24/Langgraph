@@ -1,9 +1,10 @@
-from src.config.llm import agent
+
+from src.services.llmlanggraph import langgraphllm
 from fastapi import APIRouter
 from src.schema.chatSchema import ChatRequest
 llmrouter = APIRouter(prefix="/llm", tags=["llm"])
 
-@llmrouter.post("/agent")
+@llmrouter.post("/llmgraph")
 async def call_agent(data:ChatRequest):
-    response = agent(data.message)
+    response = langgraphllm(data.message)
     return response
