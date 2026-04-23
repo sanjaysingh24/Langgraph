@@ -6,3 +6,8 @@ class ChatRequest(BaseModel):
 class LLMState(TypedDict):
     question:str
     answer:str
+
+class BlogState(TypedDict):
+    title:str
+    outline:str
+    content:str
