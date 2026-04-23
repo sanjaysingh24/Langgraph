@@ -13,15 +13,13 @@ graph = StateGraph(BlogState)
 def create_outline(state:BlogState)->BlogState:
     #fetch the title
     title = state['title']
-    #form a prompt
+   
+    prompt = f"Create an outline for a blog post with the title: {title}"
     
-    #call llm 
-
-
-    #generat a outline 
-
-
-    #update the state and return
+    outline =  model.invoke(prompt).content
+    state['outline'] = outline
+    return state
+  
 def generate_blog(message:str):
     graph.add_node("create_outline",create_outline)
     graph.add_node("create_blog",create_blog)
