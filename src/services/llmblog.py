@@ -41,4 +41,4 @@ def generate_blog(message:str):
     #execute the graph
     initial_state ={'title':message}
     final_state = workflow.invoke(initial_state)
-    print(final_state)
+    return final_state['content']
