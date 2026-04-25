@@ -17,3 +17,6 @@ class ParallelState(TypedDict):
     sentiment:str
     summary:str
     finalOutput:str
+
+class ParallelRequest(BaseModel):
+    text:str

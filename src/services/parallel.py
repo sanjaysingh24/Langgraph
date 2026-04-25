@@ -9,7 +9,6 @@ model = ChatHuggingFace(llm=agent.llm)
 
 
 #initalize the graph 
-graph = StateGraph(ParallelState)
 
 #define the business logic for the code
 
@@ -27,7 +26,7 @@ def summary_gen(state:ParallelState):
     return {'summary':summary}
 
 def final_output_gen(state:ParallelState):
-    final ="""
+    final =f"""
     sentiment:{state['sentiment']}
     Summary:{state['summary']}
 
@@ -36,7 +35,8 @@ def final_output_gen(state:ParallelState):
 
 def parallel(message:str):
     #add a graph node 
-    
+    graph = StateGraph(ParallelState)
+
     graph.add_node("sentiment_generate",sentiment_gen)
     graph.add_node("summary_generate",summary_gen)
     graph.add_node("final_output_generate",final_output_gen)
