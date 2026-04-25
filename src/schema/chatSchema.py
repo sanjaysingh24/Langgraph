@@ -11,3 +11,9 @@ class BlogState(TypedDict):
     title:str
     outline:str
     content:str
+
+class ParallelState(TypedDict):
+    text:str
+    sentiment:str
+    summary:str
+    finalOutput:str
