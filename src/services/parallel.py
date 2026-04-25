@@ -26,9 +26,15 @@ def summary_gen(state:ParallelState):
     summary = model.invoke(prompt).content
     return {'summary':summary}
 
-def final
+def final_output_gen(state:ParallelState):
+    final ="""
+    sentiment:{state['sentiment']}
+    Summary:{state['summary']}
 
-def parrllel(message:str):
+    """
+    return {'finalOutput':final} 
+
+def parallel(message:str):
     #add a graph node 
     
     graph.add_node("sentiment_generate",sentiment_gen)
@@ -36,4 +42,18 @@ def parrllel(message:str):
     graph.add_node("final_output_generate",final_output_gen)
 
     #add edges
+
+    graph.add_edge(START,"sentiment_generate")
+    graph.add_edge(START,"summary_generate")
+    graph.add_edge("sentiment_generate","final_output_generate")
+    graph.add_edge("summary_generate","final_output_generate")
+    graph.add_edge("final_output_generate",END)
+
+    #compile the graph
+    workflow = graph.compile()
+
+    #execute the graph
+    initial_state = {'text':message}
+    final_state = workflow.invoke(initial_state)
+    return final_state['finalOutput']
 
