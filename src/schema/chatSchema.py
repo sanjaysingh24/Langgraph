@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 from typing import TypedDict
 class ChatRequest(BaseModel):
     message:str
@@ -20,3 +20,7 @@ class ParallelState(TypedDict):
 
 class ParallelRequest(BaseModel):
     text:str
+
+class EvalutionSchema(BaseModel):
+    feedback: str = Field(description ="Detailed feedback for the essay")
+    score:int = Field(description = "Score out of 10",ge=0,le=10)
