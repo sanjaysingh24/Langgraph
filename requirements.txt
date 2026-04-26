@@ -5,3 +5,5 @@ langchain
 langchain-huggingface
 langchain-community
 dotenv
+langchain-google-genai
+google-generativeai
