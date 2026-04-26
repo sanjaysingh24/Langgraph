@@ -1,5 +1,6 @@
 from pydantic import BaseModel,Field
-from typing import TypedDict
+from typing import TypedDict,Annotated
+import operator
 class ChatRequest(BaseModel):
     message:str
 
@@ -24,3 +25,12 @@ class ParallelRequest(BaseModel):
 class EvalutionSchema(BaseModel):
     feedback: str = Field(description ="Detailed feedback for the essay")
     score:int = Field(description = "Score out of 10",ge=0,le=10)
+
+class EssayState(TypedDict):
+    essay:str
+    language_feedback:str
+    analysis_feedback:str
+    clarity_feedback:str
+    overall_feedback:str
+    individual_scores:Annotated[list[int],operator.add]
+    avg_score:float
