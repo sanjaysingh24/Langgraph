@@ -19,7 +19,7 @@ class AgentConfig:
         )
 class GoogleLLm:
     def __init__(self):
-        self.google_api_key=os.getenv("GEMINI_KEY")
+        self.google_api_key=os.getenv("GOOGLE_API_KEY")
         self.llm = self.google_llm()
     def google_llm(self):
         return ChatGoogleGenerativeAI(
