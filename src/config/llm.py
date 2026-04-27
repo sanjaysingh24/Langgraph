@@ -18,12 +18,13 @@ class AgentConfig:
             huggingfacehub_api_token=self.huggingFace_api_key
         )
 class GoogleLLm:
-    def __init__(self):
+    def __init__(self,model_name="gemini-2.5-flash-lite"):
         self.google_api_key=os.getenv("GOOGLE_API_KEY")
+        self.model_name=model_name
         self.llm = self.google_llm()
     def google_llm(self):
         return ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash-lite",
+            model=self.model_name,
             google_api_key=self.google_api_key,
             temperature=0.7
         )
