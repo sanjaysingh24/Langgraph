@@ -7,3 +7,4 @@ langchain-community
 dotenv
 langchain-google-genai
 google-generativeai
+streamlit
