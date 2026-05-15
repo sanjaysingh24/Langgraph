@@ -27,6 +27,9 @@ if 'message_history' not in st.session_state:
 if 'thread_id' not in st.session_state:
     st.session_state['thread_id'] = generate_thread_id()
 # side bar
+if 'chat_threads' not in st.session_state:
+    st.session_state['chat_threads'] =[]
+add_thread(st.session_state['thread_id'])
 st.sidebar.title("Langgraph Chat bot")
 if st.sidebar.button("New Chat"):
     reset_chat()
