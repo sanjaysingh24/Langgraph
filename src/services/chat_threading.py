@@ -10,7 +10,13 @@ import uuid
 def generate_thread_id():
     thread_id = uuid.uuid4()
     return thread_id
-thread_id =1
+
+
+def reset_chat():
+    thread_id = generate_thread_id()
+    st.session_state['thread_id'] = thread_id
+    st.session_state['message_history'] = []
+
 
 if 'message_history' not in st.session_state:
     st.session_state['message_history'] =[]
