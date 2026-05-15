@@ -24,7 +24,8 @@ if 'thread_id' not in st.session_state:
     st.session_state['thread_id'] = generate_thread_id()
 # side bar
 st.sidebar.title("Langgraph Chat bot")
-st.sidebar.button("New Chat")
+if st.sidebar.button("New Chat"):
+    reset_chat()
 st.sidebar.header("My Conversations")
 st.sidebar.text(st.session_state['thread_id'])
 
