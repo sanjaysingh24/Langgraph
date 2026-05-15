@@ -15,6 +15,7 @@ def generate_thread_id():
 def reset_chat():
     thread_id = generate_thread_id()
     st.session_state['thread_id'] = thread_id
+    add_thread(st.session_state['thread_id'])
     st.session_state['message_history'] = []
 
 
@@ -33,8 +34,11 @@ add_thread(st.session_state['thread_id'])
 st.sidebar.title("Langgraph Chat bot")
 if st.sidebar.button("New Chat"):
     reset_chat()
+
 st.sidebar.header("My Conversations")
-st.sidebar.text(st.session_state['thread_id'])
+for thread_id in st.session_state['chat_threads']:
+
+    st.sidebar.text(thread_id)
 
 for message in st.session_state['message_history']:
     with st.chat_message(message['role']):
