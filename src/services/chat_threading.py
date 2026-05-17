@@ -22,6 +22,10 @@ def reset_chat():
 def add_thread(thread_id):
     if 'thread_id' not in st.session_state['chat_threads']:
         st.session_state['chat_threads'].append(thread_id)
+def load_conversation(thread_id):
+    return chatbot.get_state(config={'configurable':{'thread_id':st.session_state['thread_id']}}).values['messages']
+ 
+
 
 if 'message_history' not in st.session_state:
     st.session_state['message_history'] =[]
@@ -38,11 +42,25 @@ if st.sidebar.button("New Chat"):
 st.sidebar.header("My Conversations")
 for thread_id in st.session_state['chat_threads']:
 
-    st.sidebar.text(thread_id)
+    if st.sidebar.button(str(thread_id)):
+        st.session_state['thread_id'] = thread_id
+        messages = load_conversation(thread_id)
+        temp_message=[]
+        for message in messages:
+            if isinstance(message, HumanMessage):
+                role='user'
+            else:
+                role='assistant'
+            temp_message.append({'role':role,'content':message.content})
+        st.session_state['message_history'] = temp_message
+
+
 
 for message in st.session_state['message_history']:
     with st.chat_message(message['role']):
         st.text(message['content'])
+
+    
 user_input =st.chat_input("Type Here....")
 
 if user_input:
